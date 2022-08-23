@@ -8,36 +8,29 @@ export default class App extends Component {
     super();
     this.state = {
       show: true,
-      time: 0,
-      person: {
-        fullName: "sinda",
-        bio: "",
-        imgSrc: myImage,
-        profession: "Physicist",
-      },
+      fullName: "sinda Brahem",
+      bio: "Physicist",
+      imgSrc: (
+        <img
+          style={{ width: "200px", height: "150px" }}
+          src={myImage}
+          alt="img"
+        ></img>
+      ),
+      profession: "Physics Teacher",
     };
   }
-  Handleshow = () => {
-    this.setState((prevState) => ({ show: !prevState.show }));
-  };
-  componentDidMount() {
-    console.log("cdm");
-    setInterval(() => {
-      this.setState({ time: this.state.time + 1 });
-    }, 5000);
-  }
 
+  handleShow = () => {
+    this.setState({
+      show: !this.state.show,
+    });
+  };
   render() {
     return (
       <div id="container">
-        {console.log("render")}
-        {console.log(this.state.person.fullName)}
-        {console.log(this.state.person.bio)}
-        {console.log(this.state.person.profession)}
-        <img src={myImage} alt="#" width="100px" /> <br />
-        {console.log(this.state.show)}
         <button
-          onClick={this.Handleshow}
+          onClick={this.handleShow}
           style={{
             height: "50px",
             borderRadius: "15px",
@@ -47,21 +40,17 @@ export default class App extends Component {
           }}
         >
           Click To Change
-        </button>{" "}
-        <br />
-        {console.log(this.state.show)}
-        {this.state.show ? <PersonnelProfil /> : null} <br />
-        <button
-          style={{
-            height: "50px",
-            borderRadius: "15px",
-            fontSize: "25px",
-            backgroundColor: "yellow",
-            border: "2px solid pink ",
-          }}
-        >
-          time : {this.state.time} sec
         </button>
+        {this.state.show ? (
+          <PersonnelProfil
+            name={this.state.fullName}
+            bio={this.state.bio}
+            img={this.state.imgSrc}
+            profession={this.state.profession}
+          />
+        ) : (
+          <h1> Profile not found </h1>
+        )}
       </div>
     );
   }
